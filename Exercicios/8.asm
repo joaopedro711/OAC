@@ -15,7 +15,7 @@ nl:	    .word 10
 .text
 	li a7, 8
 	la a0, str
-	li a1, 30
+	li a1, 32
 	ecall
 	
 	lw  a1, nl
@@ -28,5 +28,13 @@ nl:	    .word 10
 	li a7, 10
 	ecall
 	
-######################## Escreva a função limpa a seguir #######################	
 limpa:
+	lbu t1, 0(a0)
+	beqz t1, fim
+	bne t1, a1 segue
+	sb zero, 0(a0)
+segue:
+	addi a0, a0, 1
+	j limpa
+fim:
+	ret
